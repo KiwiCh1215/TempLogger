@@ -1,15 +1,16 @@
 #! bin/python3.9
 
 import csv
-import time
+from time import sleep
 
 
 class Logger:
-
-
+    def __init__(self):
+        print('initlog')
+        self.path = './dataValues.csv'
 
     def log(self):
-        with open(path, 'a+', newline='') as data:
+        with open(self.path, 'a+', newline='') as data:
             fieldnames = ['Date', 'Time', 'Temperature', 'Humidity']
             writer = csv.DictWriter(data, fieldnames=fieldnames)
             while True:
@@ -18,8 +19,9 @@ class Logger:
                 date = self.currentDate()
 
                 writer.writerow({'Date': date, 'Time': time, 'Temperature': newVal[0], 'Humidity': newVal[1]})
+                print('New row added')
 
-                time.sleep(5)
+                sleep(5)
 
     def newReadings(self):
         values = [12, 33]
