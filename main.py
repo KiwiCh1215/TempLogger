@@ -2,11 +2,12 @@
 
 import csv
 import os
-
+from logger import Logger
 
 
 print("starting")
 path = './dataValues.csv'
+logger = Logger()
 
 if os.path.isfile(path) == False:
     print('if')
@@ -17,9 +18,4 @@ if os.path.isfile(path) == False:
         writer.writeheader()
         writer.writerow({'Date' : 0, 'Time' : 0, 'Temperature' : 0, 'Humidity' : 0})
 
-else:
-    print('else')
-    with open(path, 'a+', newline='') as data:
-        fieldnames = ['Date', 'Time', 'Temperature', 'Humidity']
-        writer = csv.DictWriter(data, fieldnames=fieldnames)
-        writer.writerow({'Date': 2, 'Time': 2, 'Temperature': 2, 'Humidity': 2})
+logger.log()
