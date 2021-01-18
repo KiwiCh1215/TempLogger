@@ -1,37 +1,40 @@
-#! bin/python3.9
+#!./venv/bin/python3
 
 import csv
-from time import sleep
+import time
+#from temp_measurer import TempMeasurer
 
 
 class Logger:
     def __init__(self):
         print('initlog')
         self.path = './dataValues.csv'
+#        self.sensor = TempMeasurer()
 
     def log(self):
         while True:
+#            newVal = sensor.measure()
             newVal = self.newReadings()
-            time = self.currentTime()
             date = self.currentDate()
+            t = self.currentTime()
 
-            self.saveData(newVal, time, date)
+            self.saveData(newVal, date, t)
             print('New row added')
 
-            sleep(5)
+            time.sleep(5)
 
-    def saveData(self, newVal, time, date):
+    def saveData(self, newVal, date, t):
         with open(self.path, 'a+', newline='') as data:
             fieldnames = ['Date', 'Time', 'Temperature', 'Humidity']
             writer = csv.DictWriter(data, fieldnames=fieldnames)
-            writer.writerow({'Date': date, 'Time': time, 'Temperature': newVal[0], 'Humidity': newVal[1]})
+            writer.writerow({'Date': date, 'Time' : t, 'Temperature': newVal[0], 'Humidity': newVal[1]})
 
     def newReadings(self):
         values = [12, 33]
         return values
 
-    def currentTime(self):
-        return 0
-
     def currentDate(self):
-        return 1
+        return time.strftime("%d/%m/%Y")
+
+    def currentTime(self):
+        return time.strftime("%X")

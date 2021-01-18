@@ -1,4 +1,4 @@
-#! bin/python3.9
+#!./venv/bin/python3
 
 import csv
 import os
