@@ -10,18 +10,21 @@ class Logger:
         self.path = './dataValues.csv'
 
     def log(self):
+        while True:
+            newVal = self.newReadings()
+            time = self.currentTime()
+            date = self.currentDate()
+
+            self.saveData(newVal, time, date)
+            print('New row added')
+
+            sleep(5)
+
+    def saveData(self, newVal, time, date):
         with open(self.path, 'a+', newline='') as data:
             fieldnames = ['Date', 'Time', 'Temperature', 'Humidity']
             writer = csv.DictWriter(data, fieldnames=fieldnames)
-            while True:
-                newVal = self.newReadings()
-                time = self.currentTime()
-                date = self.currentDate()
-
-                writer.writerow({'Date': date, 'Time': time, 'Temperature': newVal[0], 'Humidity': newVal[1]})
-                print('New row added')
-
-                sleep(5)
+            writer.writerow({'Date': date, 'Time': time, 'Temperature': newVal[0], 'Humidity': newVal[1]})
 
     def newReadings(self):
         values = [12, 33]
