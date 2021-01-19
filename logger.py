@@ -2,7 +2,7 @@
 
 import csv
 import time
-#from temp_measurer import TempMeasurer
+from temp_measurer import TempMeasurer
 
 
 class Logger:
@@ -29,9 +29,9 @@ class Logger:
             writer = csv.DictWriter(data, fieldnames=fieldnames)
             writer.writerow({'Date': date, 'Time' : t, 'Temperature': newVal[0], 'Humidity': newVal[1]})
 
-    def newReadings(self):
-        values = [12, 33]
-        return values
+#   def newReadings(self):
+#       values = [12, 33]
+#       return values
 
     def currentDate(self):
         return time.strftime("%d/%m/%Y")
