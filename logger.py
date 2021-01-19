@@ -7,7 +7,6 @@ from temp_measurer import TempMeasurer
 
 class Logger:
     def __init__(self):
-        print('initlog')
         self.path = './dataValues.csv'
         self.sensor = TempMeasurer()
         self.d = 3600
@@ -20,7 +19,6 @@ class Logger:
             t = self.currentTime()
 
             self.saveData(newVal, date, t)
-            print('New row added')
 
             time.sleep(self.d)
 

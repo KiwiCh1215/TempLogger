@@ -10,7 +10,6 @@ path = './dataValues.csv'
 logger = Logger()
 
 if os.path.isfile(path) == False:
-    print('if')
     with open(path, 'w', newline='') as data:
         fieldnames = ['Date', 'Time', 'Temperature', 'Humidity']
         writer = csv.DictWriter(data, fieldnames=fieldnames)
