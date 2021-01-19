@@ -9,19 +9,20 @@ class Logger:
     def __init__(self):
         print('initlog')
         self.path = './dataValues.csv'
-#        self.sensor = TempMeasurer()
+        self.sensor = TempMeasurer()
+        self.d = 3600
 
     def log(self):
         while True:
-#            newVal = sensor.measure()
-            newVal = self.newReadings()
+            newVal = self.sensor.measure()
+#           newVal = self.newReadings()
             date = self.currentDate()
             t = self.currentTime()
 
             self.saveData(newVal, date, t)
             print('New row added')
 
-            time.sleep(5)
+            time.sleep(self.d)
 
     def saveData(self, newVal, date, t):
         with open(self.path, 'a+', newline='') as data:
